@@ -1,0 +1,11 @@
+body{
+    font-family: arial, helvetica;
+}
+.section, .center {
+    text-align: center;
+}
+#dougMead {
+    font-size: 6em;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+}

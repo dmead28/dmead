@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>DougMead</title>
+    
+    <link rel="stylesheet" type="text/css" href="http://localhost/dmead/jquery.dmead.fullPage.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/dmead/dmead.css" />
+    
+    <script type="text/javascript" src="http://localhost/jQuery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://localhost/jQuery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://localhost/fullPage/jquery.fullPage.min.js"></script>
+
+    <script type="text/javascript" src="http://localhost/DMLib/DMLib.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMElement.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMImg.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMAudio.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMButton.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMInput.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMRelativeWrap.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMButtonArea.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMLabel.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMArray.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMRemoteDataModel.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMSetup.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMScroller.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMCanvas.js"></script>
+    <script type="text/javascript" src="http://localhost/DMLib/DMCFadeIn.js"></script>
+    
+    <script type="text/javascript" src="http://localhost/dmead/main.js"></script>
+    
+    <script type="text/javascript">
+        //main();
+        animating = false;
+        
+        $(document).ready(function() {
+            main();
+            
+            $('#fullpage').fullpage({
+                //Navigation
+                //anchors:['intro', 'aboutMe', 'jellyfish'],
+                
+                //Scrolling
+                loopHorizontal: false,
+                continuousVertical: false,
+                
+                //Accessibility
+                
+                //Design
+                controlArrows: true,
+                verticalCentered: true,
+                sectionsColor : ['white', 'orange']
+                
+                //Custom selectors
+                
+                //events
+                
+                /*
+                //Navigation
+                menu: false,
+                anchors:['firstSlide', 'secondSlide'],
+                navigation: false,
+                navigationPosition: 'right',
+                navigationTooltips: ['firstSlide', 'secondSlide'],
+                showActiveTooltips: false,
+                slidesNavigation: true,
+                slidesNavPosition: 'bottom',
+        
+                //Scrolling
+                css3: true,
+                scrollingSpeed: 700,
+                autoScrolling: true,
+                fitToSection: true,
+                scrollBar: false,
+                easing: 'easeInOutCubic',
+                easingcss3: 'ease',
+                loopBottom: false,
+                loopTop: false,
+                loopHorizontal: true,
+                continuousVertical: false,
+                normalScrollElements: '#element1, .element2',
+                scrollOverflow: false,
+                touchSensitivity: 15,
+                normalScrollElementTouchThreshold: 5,
+        
+                //Accessibility
+                keyboardScrolling: true,
+                animateAnchor: true,
+                recordHistory: true,
+        
+                //Design
+                controlArrows: true,
+                verticalCentered: true,
+                resize : false,
+                sectionsColor : ['#ccc', '#fff'],
+                paddingTop: '3em',
+                paddingBottom: '10px',
+                fixedElements: '#header, .footer',
+                responsive: 0,
+        
+                //Custom selectors
+                sectionSelector: '.section',
+                slideSelector: '.slide',
+        
+                //events
+                onLeave: function(index, nextIndex, direction){},
+                afterLoad: function(anchorLink, index){},
+                afterRender: function(){},
+                afterResize: function(){},
+                afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){},
+                onSlideLeave: function(anchorLink, index, slideIndex, direction){}
+                */
+            });
+            
+            animatingID = "none"
+            colorsByID = {
+                "none": "white",
+                "facebook": "#99F",
+                "gitHub": "#9F9",
+                "linkedIn": "#F99",
+                "hokieSelfie": "#CC5500"
+            }
+            
+            $(".linkContainer").hover(function(event){
+                if (animatingID == event.target.getAttribute("id")) {
+                    //if already animating that one
+                    //do nothing
+                } else {
+                    //if animating something else or animating none
+                    //assign id to animatingID
+                    animatingID = event.target.getAttribute("id")
+                    //animate to new color based on which link it is
+                    $("#intro").animate({
+                        backgroundColor: colorsByID[animatingID],
+                        duration: 500
+                    })
+                }
+            })
+            $("#allLinksContainer").mouseleave(function() {
+                //animate back to white
+                animatingID = "none"
+                $("#intro").animate({
+                    backgroundColor: colorsByID[animatingID],
+                    duration: 400
+                })
+            })
+        });
+        
+    </script>
+    
+</head>
+
+<body>
+
+<div id="fullpage">
+    <div class="section active" id="intro">
+        <div>
+            <h1 id="dougMead">Doug Mead</h1>
+            <canvas id="dmeadCanvas" class="DMCanvas" style="height: 5px"></canvas>
+            <h3>(dmead.co)</h3>
+            <h2>Under Construction</h2>
+            <div id="allLinksContainer">
+                <span class="linkContainer" id="facebook">Facebook</span>
+                <span class="linkContainer" id="gitHub">Github</span>
+                <span class="linkContainer" id="linkedIn">LinkedIn</span>
+                <div style="height: 10px"></div>
+                <span class="linkContainer" id="hokieSelfie">Hokie Selfie App</span>
+            </div>
+        </div>
+    </div>
+    <div class="section" id="aboutMe">
+        <div class="center">
+            <h1>About Me</h1>
+            <article id="aboutMeArticle">
+                Hey! Once a Junior Military Officer; I'm now transitioning out of the US Army Corps of Engineers.
+                I'm a Mechanical Engineering, turned software developer (Virginia Tech with Biomedical/Biomechanical
+                focus). Within the past 3-4 years I have built on the foundation of engineering programming
+                languages (MATLAB and Labview) to extend to Swift/Objective C, Java, and web technologies
+                (Javascript, jQuery, HTML/CSS, PHP, MySQL, etc.). Since design is an intrinsic part of developing
+                successful mobile/desktop applications, I've also started designing with Adobe Photoshop and
+                Illustrator.
+
+                My time in the Army has given me exceptional leadership, resourcing, and management skills.
+                This stems from many projects and positions such as: Platoon Leader, Company Executive Officer,
+                Battalion Staff Officer (TAC), Holiday Ball planner, a National Training Center rotation, Master
+                Resilience Trainer, and Sexual Harassment/Assault Response & Prevention.
+            </article>
+        </div>
+    </div>
+    <div class="section" id="jellyfish">
+        <div>
+            <h1>Jellyfish Robot</h1>
+            <h2>Unmanned Underwater Vehicle: Biomimetic Robotic Jellyfish</h2>
+            <article>
+                Since nature has created highly efficient and effective organisms over billions of years,
+                biomimetics looks to nature to solve problems. The Lion's Mane Jellyfish (Cyanaea Capillata) is
+                extremely efficient in its movement, and very large (up to 3m diameter), so it was chosen as an ideal
+                candidate for the robot.
+                Won the best presentation at the Virginia Tech
+            </article>
+            <a href="www.vt.edu">Link to VT article</a>
+            <a>Link to CNN</a>
+            <a>Link to PopSci</a>
+        </div>
+    </div>
+    <div class="section" id="published">
+        <div>
+            <h1>Published in ScienceDirect!</h1>
+            <article>
+                Published in ScienceDirect for work on Something Something Dynamic Electricity Tariffs Something
+            </article>
+            <a>Link to published article</a>
+            <a href="http://dmead.co/SteveNew">Link to site containing the survey</a>
+        </div>
+    </div>
+    <div class="section" id="resume">
+        <div>
+            <h1>Resume</h1>
+            <a href="http://dmead.co/draft/general.docx">Link to master resume</a>
+            <a href="http://dmead.co/draft/quake.docx">Link to quake resume</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
